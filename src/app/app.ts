@@ -8,5 +8,5 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.css'
 })
 export class App {
-  protected title = 'pmtool_fe_ng';
+  protected title = 'Funding Management System';
 }

@@ -1,0 +1,6 @@
+<h3>{{ title }}</h3>
+@for (task of tasks; track task.id) {
+  <app-task-card-component [task]="task" (completeTask)="onCompleteTask($event)"></app-task-card-component>
+  <div style="margin-bottom: 10px;"></div>
+} 
+

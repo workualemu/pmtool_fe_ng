@@ -1,0 +1,14 @@
+<h3>{{ title }}</h3>
+@for (course of courses; track course.title) {
+  <div>
+    <h4>{{ course.title }} - {{ course.price | currency:'USD':'symbol':'1.2-2' }}</h4>
+    <p>{{ course.description }}</p>
+    <p>Date: {{ course.date | date:'longDate' }}</p>
+    @if( course.soldout){
+      <p>Sold Out</p>
+    }
+    @if( course.onsale){
+      <p>Onsale</p>
+    }
+  </div>
+}
