@@ -1,0 +1,83 @@
+<div class="max-w-4xl mx-auto p-4 space-y-3">
+  <h2 class="text-xl font-semibold">Clients</h2>
+
+  <!-- Controls -->
+  <div class="flex flex-wrap items-center gap-3">
+    <label class="text-sm">
+      Page size:
+      <select class="border px-2 py-1" [value]="pageSize()" (change)="changePageSize(+$any($event.target).value)">
+        <option [value]="5">5</option>
+        <option [value]="10">10</option>
+        <option [value]="20">20</option>
+      </select>
+    </label>
+
+    <div class="ml-auto flex items-center gap-2">
+      <button class="border px-3 py-1" (click)="changePage(-1)" [disabled]="(page()?.pageNumber ?? 0) === 0">
+        ‹ Prev
+      </button>
+      <span class="text-sm">
+        Page {{ (page()?.pageNumber ?? 0) + 1 }} of {{ page()?.totalPages ?? 1 }}
+      </span>
+      <button class="border px-3 py-1" (click)="changePage(1)"
+        [disabled]="(page()?.pageNumber ?? 0) >= ((page()?.totalPages ?? 1) - 1)">
+        Next ›
+      </button>
+    </div>
+  </div>
+
+  <!-- Errors / Loading -->
+  <p *ngIf="error()" class="text-red-600 text-sm">{{ error() }}</p>
+  <p *ngIf="loading()" class="text-sm">Loading…</p>
+
+  <!-- Table -->
+  <div class="overflow-x-auto">
+    <table class="w-full border-collapse">
+      <thead>
+        <tr class="text-left border-b">
+          <th class="p-2 cursor-pointer" (click)="sort('id')">
+            ID
+            @if (sortBy() === 'id') { 
+              <small>{{ sortDir() }}</small>
+            }
+          </th>
+          <th class="p-2 cursor-pointer" (click)="sort('name')">
+            Name
+            @if (sortBy() === 'name') {
+              <small>({{ sortDir() }})</small>
+            }
+          </th>
+          <th class="p-2 cursor-pointer" (click)="sort('description')">
+            Description
+            @if(sortBy() === 'description') {
+              <small>({{ sortDir() }})</small>
+            }
+          </th>
+          <th class="p-2 cursor-pointer">
+            Created By
+          </th>
+          <th class="p-2 cursor-pointer">
+            Updated By
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (c of page()?.content ?? []; track c.clientId) {
+          <tr class="border-b">
+            <td class="p-2">{{ c.clientId }}</td>
+            <td class="p-2">{{ c.clientName }}</td>
+            <td class="p-2">{{ c.description || '—' }}</td>
+            <td class="p-2">{{ c.createdByName }}</td>
+            <td class="p-2">{{ c.updatedByName }}</td>
+          </tr>
+        }
+        
+        @if (!loading() && (page()?.content?.length ?? 0) === 0) {
+        <tr>
+          <td class="p-2 text-sm text-gray-500" colspan="3">No clients found.</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

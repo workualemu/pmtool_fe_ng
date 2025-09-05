@@ -1,0 +1,12 @@
+<h1 class="text-3xl font-bold underline">
+  {{ title }}
+</h1>
+<div class="flow-root">
+  <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+    @for (task of tasks; track task.id) {
+      <li class="py-3 sm:py-4">
+        <app-task-card-component [task]="task" (completeTask)="onCompleteTask($event)"></app-task-card-component>
+      </li>
+    } 
+  </ul>
+</div>
