@@ -1,0 +1,43 @@
+/* Simple "popper" mimic */
+:root {
+  @apply [--margin-x:1rem] [--main-sidebar-width:4.5rem] [--sidebar-panel-width:230px] [--sidebar-panel-min-width:64px] md:[--margin-x:1.5rem] lg:[--main-sidebar-width:5rem] lg:[--sidebar-panel-width:240px] xl:[--margin-x:4rem];
+}
+.main-sidebar {
+  @apply fixed top-0 left-0 z-40 h-full w-[var(--main-sidebar-width)] shrink-0 -translate-x-full transform-gpu transition-transform duration-200 ease-in md:z-[60] md:translate-x-0;
+}
+
+.is-sidebar-open .main-sidebar {
+  @apply translate-x-0;
+}
+
+.sidebar-panel {
+  @apply fixed top-0 left-0 z-30 h-full w-[calc(var(--main-sidebar-width)+var(--sidebar-panel-width))] -translate-x-full transform-gpu shadow-soft transition-transform delay-150 duration-[.25s] ease-in dark:shadow-navy-900/60 md:delay-[unset];
+}
+
+.is-sidebar-open .sidebar-panel {
+  @apply translate-x-0 ease-out;
+}
+
+.sidebar-panel-min {
+  @apply fixed z-40 h-full w-[var(--sidebar-panel-min-width)] shrink-0 -translate-x-full transform-gpu shadow-soft transition-transform duration-[.25s] ease-in dark:shadow-navy-900/60 md:translate-x-[var(--main-sidebar-width)];
+}
+
+.is-sidebar-open .sidebar-panel-min {
+  @apply -translate-x-full;
+}
+
+.popper-root {
+  top: auto;
+  left: 4rem;
+  /* pop from the sidebar to the right */
+  z-index: 50;
+  display: none;
+}
+
+.popper-root.show {
+  display: block;
+}
+
+.popper-box {
+  margin-left: 0.5rem;
+}

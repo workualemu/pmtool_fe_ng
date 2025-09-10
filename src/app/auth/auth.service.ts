@@ -10,7 +10,7 @@ import { environment } from '../../environments/environment';
 export class AuthService {
   readonly user = signal<UserDTO | null>(null);
   readonly isAuthenticated = computed(() => !!this.user());
-
+  
   constructor(private http: HttpClient) {}
 
   login(body: LoginBody) {
@@ -37,7 +37,7 @@ export class AuthService {
       email: res.email,
       first_name: res.first_name,
       last_name: res.last_name,
-      client_id: res.client_id,
+      clientId: res.client_id,
       recent_project_id: res.recent_project_id
     };
     return u;

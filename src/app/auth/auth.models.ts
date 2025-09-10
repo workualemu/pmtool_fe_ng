@@ -10,6 +10,6 @@ export interface UserDTO {
   email: string;
   first_name: string;
   last_name?: string;
-  client_id: number;
+  clientId: number;
   recent_project_id?: number;
 }
