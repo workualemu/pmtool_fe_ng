@@ -1,1 +1,28 @@
 @import "tailwindcss";
+
+/* defaults = expanded */
+.layout {
+  --sb-w: 16rem;
+}
+
+/* collapsed */
+.layout.is-collapsed {
+  --sb-w: 4rem;
+}
+
+/* sidebar (inside your sidebar component or a global rule that matches it) */
+app-main-sidebar aside {
+  width: var(--sb-w);
+  transition: width 300ms ease-in-out, transform 300ms ease-in-out;
+}
+
+@media (max-width: 639px) {
+  .layout {
+    --sb-w: 0rem;
+  }
+  /* content stays full width on mobile */
+}
+
+html, body {
+  overflow-x: hidden;
+}

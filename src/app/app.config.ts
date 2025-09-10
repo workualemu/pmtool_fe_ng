@@ -6,7 +6,7 @@ import { provideClientHydration, withEventReplay } from '@angular/platform-brows
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { withCredentials } from './core/with-credentials.interceptor';
 import { LucideAngularModule, Home, ClipboardList, SquareKanban, ChartGantt, ChartPie, Users, Settings, CircleUserRound, LogOut, Mail, 
-          Shield, Flag, Tags, ListChecks, LayoutTemplate, Settings2, ChevronRight, ChevronLeft,
+          Shield, Flag, Tags, ListChecks, LayoutTemplate, Settings2, ChevronRight, ChevronLeft, Menu
        } from 'lucide-angular';
 
 
@@ -36,7 +36,8 @@ export const appConfig: ApplicationConfig = {
         LayoutTemplate,
         Settings2,
         ChevronRight,
-        ChevronLeft
+        ChevronLeft,
+        Menu
       })),
   ]
 };

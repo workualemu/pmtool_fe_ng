@@ -7,6 +7,9 @@ import { ClientListComponent } from './features/clients/client-list/client-list.
 import { BaseLayoutComponent } from './layouts/base-layout/base-layout.component';
 import { SystemLayoutComponent } from './layouts/system-layout/system-layout.component';
 import { ClientLayoutComponent } from './layouts/client-layout/client-layout.component';
+import { KanbanHomeComponent } from './features/tasks/kanban-home/kanban-home.component';
+import { GanttHomeComponent } from './features/tasks/gantt-home/gantt-home.component';
+import { ReportHomeComponent } from './features/report-home/report-home.component';
 
 export const routes: Routes = [
   {
@@ -14,13 +17,21 @@ export const routes: Routes = [
     component: BaseLayoutComponent,
     children: [
       { path: 'login', component: LoginComponent },
-      { path: '', pathMatch: 'full', redirectTo: 'login' }, // optional default
+      { path: '', pathMatch: 'full', redirectTo: 'login' }, 
     ],
   },
   {  path: 'systemhome', component: SystemLayoutComponent },
-  {  path: 'clienthome', component: ClientLayoutComponent },
+  {  
+    path: 'clienthome', 
+    component: ClientLayoutComponent,
+    children: [
+      {  path: 'tasks', component: TaskListComponent },
+      {  path: 'kanban-home', component: KanbanHomeComponent },
+      {  path: 'gantt-home', component: GanttHomeComponent },
+      {  path: 'reports', component: ReportHomeComponent },
+    ]
+  },
   {  path: 'register', component: Register },
   {  path: 'resetpassword', component: ResetPassword },
   {  path: 'clients', component: ClientListComponent },
-  {  path: 'tasks', component: TaskListComponent },
 ];

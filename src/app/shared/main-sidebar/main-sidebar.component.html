@@ -29,64 +29,18 @@
     <!-- Main nav -->
     <nav class="is-scrollbar-hidden flex grow flex-col gap-1 overflow-y-auto px-2 pt-6">
       <!-- Reusable item: icon always, label only when expanded -->
-      <a routerLink="/" routerLinkActive="text-primary dark:bg-navy-600 bg-primary/10 dark:text-accent-light"
-        [routerLinkActiveOptions]="{ exact: true }"
-        class="group flex h-11 items-center rounded-lg px-2 outline-none transition-colors duration-200 hover:bg-blue-100 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25"
-        [class.justify-center]="collapsed" [title]="collapsed ? 'Home' : null">
-        <lucide-icon name="home" class="h-8 w-8"></lucide-icon>
-        @if(!collapsed){
-          <span class="ml-3 text-sm text-slate-700 dark:text-navy-100 transition-[opacity,margin] duration-200"
-            [class.opacity-0]="collapsed" [class.pointer-events-none]="collapsed" [class.ml-0]="collapsed">Home</span>
-        }
-      </a>
-
-      <a [routerLink]="['/tasks']" [queryParams]="{ project_id: projectId }"
-        routerLinkActive="text-primary dark:bg-navy-600 bg-primary/10 dark:text-accent-light"
-        class="group flex h-11 items-center rounded-lg px-2 outline-none transition-colors duration-200 hover:bg-blue-100 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25"
-        [class.justify-center]="collapsed" [title]="collapsed ? 'Tasks' : null">
-        <lucide-icon name="clipboard-list" class="h-8 w-8"></lucide-icon>
-        @if(!collapsed){
-        <span class="ml-3 text-sm text-slate-700 dark:text-navy-100 transition-[opacity,margin] duration-200"
-          [class.opacity-0]="collapsed" [class.pointer-events-none]="collapsed" [class.ml-0]="collapsed">Tasks</span>
-        }
-      </a>
-
-      <a routerLink="/kanban" routerLinkActive="text-primary dark:bg-navy-600 bg-primary/10 dark:text-accent-light"
-        class="group flex h-11 items-center rounded-lg px-2 outline-none transition-colors duration-200 hover:bg-blue-100 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25"
-        [class.justify-center]="collapsed" [title]="collapsed ? 'Kanban board' : null">
-        <lucide-icon name="square-kanban" class="h-8 w-8"></lucide-icon>
-        @if(!collapsed){
-          <span class="ml-3 text-sm text-slate-700 dark:text-navy-100 transition-[opacity,margin] duration-200"
-            [class.opacity-0]="collapsed" [class.pointer-events-none]="collapsed" [class.ml-0]="collapsed">Kanban
-            board</span>
-        }
-      </a>
-
-      <a routerLink="/gantt" routerLinkActive="text-primary dark:bg-navy-600 bg-primary/10 dark:text-accent-light"
-        class="group flex h-11 items-center rounded-lg px-2 outline-none transition-colors duration-200 hover:bg-blue-100 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25"
-        [class.justify-center]="collapsed" [title]="collapsed ? 'Gantt chart' : null">
-        <lucide-icon name="chart-gantt" class="h-8 w-8"></lucide-icon>
-        @if(!collapsed){
-          <span class="ml-3 text-sm text-slate-700 dark:text-navy-100 transition-[opacity,margin] duration-200"
-            [class.opacity-0]="collapsed" [class.pointer-events-none]="collapsed" [class.ml-0]="collapsed">Gantt
-            chart</span>
-        }
-      </a>
-
-      <a routerLink="/reports-use" routerLinkActive="text-primary dark:bg-navy-600 bg-primary/10 dark:text-accent-light"
-        class="group flex h-11 items-center rounded-lg px-2 outline-none transition-colors duration-200 hover:bg-blue-100 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25"
-        [class.justify-center]="collapsed" [title]="collapsed ? 'Reports' : null">
-        <lucide-icon name="chart-pie" class="h-8 w-8"></lucide-icon>
-        @if(!collapsed){
-          <span class="ml-3 text-sm text-slate-700 dark:text-navy-100 transition-[opacity,margin] duration-200"
-            [class.opacity-0]="collapsed" [class.pointer-events-none]="collapsed" [class.ml-0]="collapsed">Reports</span>
-        }
-      </a>
+       @for(item of items; track item.label){
+        <app-main-sidebar-item [icon]="item.icon" [label]="item.label" [tooltip]="item.tooltip" [redirectTo]="item.redirectTo"
+          [collapsed]="collapsed" />
+       }
     </nav>
 
     <!-- Bottom area (optional) -->
     <div class="px-2 py-3">
-      <!-- Add anything you need here (profile, settings, etc.) -->
+      @for(item of bottomItems; track item.label){
+      <app-main-sidebar-item [icon]="item.icon" [label]="item.label" [tooltip]="item.tooltip" [redirectTo]="item.redirectTo"
+        [collapsed]="collapsed" />
+      }
     </div>
   </div>
 </aside>

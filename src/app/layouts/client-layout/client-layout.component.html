@@ -1,1 +1,10 @@
-<p>client-layout works!</p>
+<div class="layout" [class.is-collapsed]="sidebarCollapsed">
+  <app-main-sidebar [(collapsed)]="sidebarCollapsed"></app-main-sidebar>
+
+  <div class="min-h-screen overflow-x-hidden transition-[margin,width] duration-300 ease-in-out p-4"
+    [style.marginLeft.rem]="sidebarCollapsed ? 4 : 16"
+    [style.width]="sidebarCollapsed ? 'calc(100vw - 4rem)' : 'calc(100vw - 16rem)'">
+    <router-outlet />
+  </div>
+</div>
+
