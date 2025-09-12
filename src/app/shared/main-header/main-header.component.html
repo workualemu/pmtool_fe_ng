@@ -1,0 +1,99 @@
+<div
+  class="fixed sticky top-0 z-40 w-full border-b border-slate-200 transition-[margin,width] duration-300 ease-in-out bg-white/90 backdrop-blur dark:border-navy-700 dark:bg-navy-900/80"
+  [style.marginLeft.rem]="collapsed ? 4 : 16"
+  [style.width]="collapsed ? 'calc(100vw - 4rem)' : 'calc(100vw - 16rem)'">
+  <div class="mx-auto flex h-14 max-w-screen-2xl items-center justify-between px-4">
+    <!-- Left: brand / title slot -->
+    <div class="flex items-center gap-3">
+      <a routerLink="/" class="font-semibold">Your App is my application hidden</a>
+    </div>
+
+    <!-- Right: actions -->
+    <div class="flex items-center gap-2">
+      <!-- Notifications -->
+      <button type="button" (click)="onNotifClick()"
+        class="relative inline-flex h-9 w-9 items-center justify-center rounded-full transition hover:bg-slate-100 focus-visible:outline-none focus-visible:ring dark:hover:bg-navy-700"
+        aria-label="Open notifications">
+        <lucide-icon name="bell" class="h-5 w-5"></lucide-icon>
+        @if (notificationsCount > 0) {
+        <span class="absolute -right-0.5 -top-0.5 rounded-full px-1.5 text-[10px] leading-5 bg-red-600 text-white">
+          {{ notificationsCount }}
+        </span>
+        }
+      </button>
+
+      <!-- Dark mode toggle -->
+      <button type="button" (click)="toggleDark()"
+        class="inline-flex h-9 w-9 items-center justify-center rounded-full transition hover:bg-slate-100 focus-visible:outline-none focus-visible:ring dark:hover:bg-navy-700"
+        [attr.aria-label]="isDark() ? 'Switch to light mode' : 'Switch to dark mode'">
+        @if (!isDark()) {
+        <lucide-icon name="moon" class="h-5 w-5"></lucide-icon>
+        } @else {
+        <lucide-icon name="sun" class="h-5 w-5"></lucide-icon>
+        }
+      </button>
+
+      <!-- Language dropdown -->
+      <div class="relative" 
+        appClickOutside
+        [clickOutsideEnabled]="showLang()"
+        (clickOutside)="showLang.set(false)">
+        <button type="button" (click)="showLang.set(!showLang())"
+          class="inline-flex h-9 items-center gap-2 rounded-full px-3 transition hover:bg-slate-100 focus-visible:outline-none focus-visible:ring dark:hover:bg-navy-700"
+          aria-haspopup="menu" [attr.aria-expanded]="showLang()" aria-label="Change language">
+          <lucide-icon name="globe" class="h-5 w-5"></lucide-icon>
+          <span class="text-sm">{{ lang() }}</span>
+          <lucide-icon name="chevron-down" class="h-4 w-4"></lucide-icon>
+        </button>
+
+        @if (showLang()) {
+        <div
+          class="absolute right-0 mt-2 w-36 rounded-xl border border-slate-200 bg-white p-1 shadow-lg dark:border-navy-700 dark:bg-navy-800"
+          role="menu">
+          <button type="button" (click)="setLang('EN')"
+            class="block w-full rounded-lg px-3 py-2 text-left text-sm hover:bg-slate-100 dark:hover:bg-navy-700"
+            role="menuitem">
+            English
+          </button>
+          <button type="button" (click)="setLang('FR')"
+            class="block w-full rounded-lg px-3 py-2 text-left text-sm hover:bg-slate-100 dark:hover:bg-navy-700"
+            role="menuitem">
+            Français
+          </button>
+        </div>
+        }
+      </div>
+
+      <!-- Profile dropdown -->
+      <div class="relative"
+        appClickOutside
+        [clickOutsideEnabled]="showProfile()"
+        (clickOutside)="showProfile.set(false)">
+        <button type="button" (click)="showProfile.set(!showProfile())"
+          class="inline-flex items-center gap-2 rounded-full px-2 py-1 transition hover:bg-slate-100 focus-visible:outline-none focus-visible:ring dark:hover:bg-navy-700"
+          aria-haspopup="menu" [attr.aria-expanded]="showProfile()" aria-label="Open user menu">
+          <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-200 dark:bg-navy-600">
+            <lucide-icon name="user" class="h-5 w-5"></lucide-icon>
+          </span>
+          <lucide-icon name="chevron-down" class="h-4 w-4"></lucide-icon>
+        </button>
+
+        @if (showProfile()) {
+        <div
+          class="absolute right-0 mt-2 w-44 rounded-xl border border-slate-200 bg-white p-1 shadow-lg dark:border-navy-700 dark:bg-navy-800"
+          role="menu">
+          <a routerLink="/profile" class="block rounded-lg px-3 py-2 text-sm hover:bg-slate-100 dark:hover:bg-navy-700"
+            role="menuitem">Profile</a>
+          <a routerLink="/settings" class="block rounded-lg px-3 py-2 text-sm hover:bg-slate-100 dark:hover:bg-navy-700"
+            role="menuitem">Settings</a>
+          <button type="button"
+            class="block w-full rounded-lg px-3 py-2 text-left text-sm hover:bg-slate-100 dark:hover:bg-navy-700"
+            role="menuitem">
+            Sign out
+          </button>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

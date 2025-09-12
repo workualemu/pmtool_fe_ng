@@ -1,0 +1,61 @@
+<div class="card mt-3">
+  <div class="is-scrollbar-hidden min-w-full overflow-x-auto">
+    <table class="is-hoverable w-full text-left">
+      <thead class="bg-blue-200">
+        <tr>
+          @for(column of columns; track $index){
+            <th scope="col" class="px-6 py-3 font-bold tracking-wide text-left
+               border-b border-blue-400"
+              [style.width.%]="column.width"
+              [ngClass]="{
+                'text-left': column.justify === 'left',
+                'text-center': column.justify === 'center',
+                'text-right': column.justify === 'right'
+              }">
+              {{ column.label }}
+            </th>
+          }
+          @if(actions.length > 0){
+            <th scope="col" class="px-6 py-3 font-bold tracking-wide text-right
+                border-b border-blue-400">
+              Actions
+            </th>
+          }
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        @for(record of data; track $index){
+          <tr>
+            @for(column of columns; track column.key){
+              <td class="px-6 py-3 text-[15px] font-medium text-slate-700 tracking-normal font-inter"
+              [ngClass]="{
+                'text-left': column.justify === 'left',
+                'text-center': column.justify === 'center',
+                'text-right': column.justify === 'right'
+              }">
+                {{ record[column.key] }}
+              </td>
+            }
+            @if(actions.length > 0){
+              <td class="px-6 py-3 text-[15px] font-medium text-right text-gray-800 tracking-normal font-inter">
+                <div class="flex space-x-2 justify-end">
+                  @for (action of actions; track action.id) {
+                    <button type="button" (click)="onAction(action.id, record)"
+                      class="inline-flex items-center justify-center
+                            h-8 w-8 rounded-lg
+                            text-slate-600 hover:text-white
+                            bg-slate-100 hover:bg-blue-500
+                            focus:outline-none focus:ring-2 focus:ring-blue-400
+                            transition-colors duration-200">
+                      <lucide-icon [name]="action.icon" class="w-4 h-4"></lucide-icon>
+                    </button>
+                  }
+                </div>
+              </td>
+            }
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
