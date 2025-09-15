@@ -24,7 +24,7 @@
         </tr>
       </thead>
       <tbody class="bg-white divide-y divide-gray-200">
-        @for(record of data; track $index){
+        @for(record of data?.content ?? []; track $index){
           <tr>
             @for(column of columns; track column.key){
               <td class="px-6 py-3 text-[15px] font-medium text-slate-700 tracking-normal font-inter"

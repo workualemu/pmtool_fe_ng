@@ -4,3 +4,22 @@ export interface MainSidebarItem {
   tooltip: string;
   redirectTo: string;
 }
+
+export interface HttpPageResponse<T> {
+  content: T[];
+  totalElements: number;
+  totalPages: number;
+  pageSize: number;
+  pageNumber: number;
+  lastPage?: boolean;
+}
+
+
+export type SortDir = 'asc' | 'desc';
+
+export interface HttpListOptions {
+  pageNumber: number;
+  pageSize: number;
+  sortBy: string;
+  sortDir: SortDir;
+}

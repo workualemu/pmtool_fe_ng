@@ -1,0 +1,7 @@
+/* :host-context(cdk-dialog-container){
+  display: block;
+  border-radius: 0.375em;
+  background-color: white;
+  filter: drop-shadow(0, 0, 2em rgba(black, 0.5));
+  padding: 0 2em 2em;
+} */

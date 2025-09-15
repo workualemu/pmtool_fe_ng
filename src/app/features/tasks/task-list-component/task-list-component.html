@@ -1,8 +1,12 @@
 <h1 class="text-3xl font-bold underline">
   {{ title }}
 </h1>
+<div class="flex items-center justify-between mb-4">
+  <h1 class="text-2xl font-bold">Tasks</h1>
+  <button class="rounded px-4 py-2 bg-blue-600 text-white" (click)="addTask()">New Task</button>
+</div>
 <app-wpm-table 
-  [data]="tasks" 
+  [data]="response" 
   [columns]="columns"
   [actions]="actions" 
   (action)="handleTableAction($event)">

@@ -1,0 +1,47 @@
+<div class="w-full max-w-lg">
+  <h2 class="text-xl font-semibold mb-4">
+    {{ data.mode === 'create' ? 'Create Task' : 'Edit Task' }}
+  </h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
+    <div>
+      <label class="block text-sm font-medium mb-1">Title <span class="text-red-600">*</span></label>
+      <input class="w-full rounded border px-3 py-2" type="text" formControlName="title"
+        placeholder="e.g. Prepare sprint report" />
+      @if (form.controls.title.touched && form.controls.title.invalid) {
+      <p class="text-xs text-red-600 mt-1">Title is required.</p>
+      }
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium mb-1">Description</label>
+      <textarea class="w-full rounded border px-3 py-2" rows="3" formControlName="description"
+        placeholder="Optional details..."></textarea>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <label class="block text-sm font-medium mb-1">Status</label>
+        <select class="w-full rounded border px-3 py-2" formControlName="status">
+          <option value="Todo">Todo</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Completed">Completed</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium mb-1">Due date</label>
+        <input class="w-full rounded border px-3 py-2" type="date" formControlName="dueDate" />
+      </div>
+    </div>
+
+    <div class="flex items-center justify-end gap-2 pt-4">
+      <button type="button" class="rounded px-4 py-2 border" (click)="close()">Cancel</button>
+
+      <button type="submit" class="rounded px-4 py-2 bg-blue-600 text-white disabled:opacity-50"
+        [disabled]="form.invalid || saving()">
+        {{ saving() ? 'Saving…' : (data.mode === 'create' ? 'Create' : 'Update') }}
+      </button>
+    </div>
+  </form>
+</div>

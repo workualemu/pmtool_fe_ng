@@ -15,6 +15,46 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
     rel="stylesheet" />
 
+    <style>
+      /* CDK overlay hardening */
+      .cdk-overlay-container {
+        position: fixed !important;
+        inset: 0 !important;
+        z-index: 100000 !important;
+        pointer-events: none !important;
+      }
+    
+      .cdk-global-overlay-wrapper {
+        position: fixed !important;
+        inset: 0 !important;
+        /* full viewport */
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        pointer-events: none !important;
+      }
+    
+      .cdk-overlay-pane {
+        position: relative !important;
+        pointer-events: auto !important;
+        /* clickable */
+      }
+    
+      .cdk-overlay-backdrop {
+        position: fixed !important;
+        inset: 0 !important;
+        opacity: 0 !important;
+        transition: opacity .2s ease-in-out !important;
+        background: transparent !important;
+        z-index: 100001 !important;
+      }
+    
+      .cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+        opacity: 1 !important;
+        background: rgba(0, 0, 0, .45) !important;
+        /* dim backdrop */
+      }
+    </style>
   <!-- Dark Mode Flicker Fix -->
   <script>
     try {

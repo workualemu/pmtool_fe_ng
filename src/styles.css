@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import '@angular/cdk/overlay-prebuilt.css';
 
 /* defaults = expanded */
 .layout {
@@ -25,4 +26,13 @@ app-main-sidebar aside {
 
 html, body {
   overflow-x: hidden;
+}
+
+.task-dialog-panel .cdk-dialog-container>* {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .12);
+  width: 560px;
+  max-width: 95vw;
+  padding: 24px;
 }

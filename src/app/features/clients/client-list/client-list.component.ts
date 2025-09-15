@@ -1,7 +1,8 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ClientService } from '../../../services/client.service';
-import { Client, PageResponse } from '../../../models/client.model';
+import { Client } from '../../../models/client.model';
+import { HttpPageResponse } from '../../../models/utility.model';
 
 @Component({
   selector: 'app-client-list',
@@ -22,7 +23,7 @@ export class ClientListComponent implements OnInit {
   // data state
   loading = signal(false);
   error   = signal<string | null>(null);
-  page    = signal<PageResponse<Client> | null>(null);
+  page    = signal<HttpPageResponse<Client> | null>(null);
 
   ngOnInit(): void {
     this.load();

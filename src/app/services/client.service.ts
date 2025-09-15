@@ -1,22 +1,24 @@
+import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
-import { Client, ListClientsOptions, PageResponse } from '../models/client.model';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
+import { HttpListOptions, HttpPageResponse } from '../models/utility.model';
 
+const API = `${environment.apiUrl}/system/clients`;
 
-@Injectable({
-  providedIn: 'root'
-})
+export interface Client {
+  clientId: number;
+  code?: string;
+  clientName: string;
+  description: string;
+  // add other fields your backend returns
+}
+
+@Injectable({ providedIn: 'root' })
 export class ClientService {
-  
-  constructor(private http: HttpClient) { }
+  private http = inject(HttpClient);
 
-  // getClients(pageNumber: number, pageSize: number, sortBy: string, sortDir: 'asc' | 'desc') {
-  //   return this.http.get<any>(`environment.apiUrl/clients`, {
-  // }
-
-  getClients(opts: Partial<ListClientsOptions> = {}): Observable<PageResponse<Client>> {
+  getClients(opts: Partial<HttpListOptions> = {}): Observable<HttpPageResponse<Client>> {
     const {
       pageNumber = 0,
       pageSize = 5,
@@ -33,6 +35,7 @@ export class ClientService {
       },
     });
 
-    return this.http.get<PageResponse<Client>>(`${environment.apiUrl}/system/clients`, { params });
+    // Thanks to your withCreds interceptor, cookies are included automatically.
+    return this.http.get<HttpPageResponse<Client>>(API, { params });
   }
 }
