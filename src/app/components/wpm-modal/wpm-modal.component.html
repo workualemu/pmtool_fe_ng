@@ -1,0 +1,22 @@
+@if (open()) {
+<!-- Overlay -->
+<div class="fixed inset-0 z-[9990] bg-black/60 flex items-stretch" role="dialog" aria-modal="true"
+  (click)="onOverlayClick($event)" (window:keydown.escape)="onEsc()">
+  <!-- Right panel -->
+  <div class="relative ml-auto h-full bg-white dark:bg-gray-900 dark:text-gray-100 shadow-xl
+             transition-transform duration-300 ease-in-out will-change-transform
+             z-[9991] border-l border-gray-200/70 dark:border-gray-700" [class]="widthClass()"
+    [class.translate-x-0]="slideIn()" [class.translate-x-full]="!slideIn()" (click)="$event.stopPropagation()">
+    <!-- Header -->
+    <div class="sticky top-0 px-6 py-4 border-b bg-inherit z-10 flex items-center justify-between">
+      <h3 class="text-lg font-semibold">{{ title() }}</h3>
+      <button class="p-1 text-gray-600 hover:text-gray-900" (click)="close()" aria-label="Close">✕</button>
+    </div>
+
+    <!-- Body (projected content) -->
+    <div class="p-4 overflow-auto h-[calc(100vh-4rem)]">
+      <ng-content />
+    </div>
+  </div>
+</div>
+}

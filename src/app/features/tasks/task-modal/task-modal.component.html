@@ -1,11 +1,9 @@
 <div class="w-full max-w-lg">
-  <h2 class="text-xl font-semibold mb-4">
-    {{ data.mode === 'create' ? 'Create Task' : 'Edit Task' }}
-  </h2>
-
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
     <div>
-      <label class="block text-sm font-medium mb-1">Title <span class="text-red-600">*</span></label>
+      <label class="block text-sm font-medium mb-1">
+        Title <span class="text-red-600">*</span>
+      </label>
       <input class="w-full rounded border px-3 py-2" type="text" formControlName="title"
         placeholder="e.g. Prepare sprint report" />
       @if (form.controls.title.touched && form.controls.title.invalid) {
@@ -23,24 +21,63 @@
       <div>
         <label class="block text-sm font-medium mb-1">Status</label>
         <select class="w-full rounded border px-3 py-2" formControlName="status">
-          <option value="Todo">Todo</option>
+          <option value="Not Started">Not Started</option>
           <option value="In Progress">In Progress</option>
           <option value="Completed">Completed</option>
         </select>
       </div>
 
       <div>
-        <label class="block text-sm font-medium mb-1">Due date</label>
-        <input class="w-full rounded border px-3 py-2" type="date" formControlName="dueDate" />
+        <label class="block text-sm font-medium mb-1">Priority</label>
+        <select class="w-full rounded border px-3 py-2" formControlName="priority">
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+        </select>
       </div>
     </div>
 
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <label class="block text-sm font-medium mb-1">
+          Start date (planned) <span class="text-red-600">*</span>
+        </label>
+        <input class="w-full rounded border px-3 py-2" type="date" formControlName="start_date_planned" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1">
+          End date (planned) <span class="text-red-600">*</span>
+        </label>
+        <input class="w-full rounded border px-3 py-2" type="date" formControlName="end_date_planned" />
+        @if (form.hasError('dateOrder') &&
+        (form.controls.end_date_planned.touched || form.controls.start_date_planned.touched)) {
+        <p class="text-xs text-red-600 mt-1">End date cannot be before start date.</p>
+        }
+      </div>
+    </div>
+
+    <!-- Optional: expose Actual dates (string|null) if you want them editable -->
+    <!--
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <label class="block text-sm font-medium mb-1">Start date (actual)</label>
+        <input class="w-full rounded border px-3 py-2" type="date" formControlName="start_date_actual" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1">End date (actual)</label>
+        <input class="w-full rounded border px-3 py-2" type="date" formControlName="end_date_actual" />
+      </div>
+    </div>
+    -->
+
     <div class="flex items-center justify-end gap-2 pt-4">
-      <button type="button" class="rounded px-4 py-2 border" (click)="close()">Cancel</button>
+      <button type="button" class="rounded px-4 py-2 border" (click)="cancel.emit()" [disabled]="saving()">
+        Cancel
+      </button>
 
       <button type="submit" class="rounded px-4 py-2 bg-blue-600 text-white disabled:opacity-50"
         [disabled]="form.invalid || saving()">
-        {{ saving() ? 'Saving…' : (data.mode === 'create' ? 'Create' : 'Update') }}
+        {{ mode() === 'edit' ? (saving() ? 'Saving…' : 'Save changes') : (saving() ? 'Saving…' : 'Create') }}
       </button>
     </div>
   </form>
