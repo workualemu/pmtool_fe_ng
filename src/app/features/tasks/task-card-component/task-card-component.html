@@ -7,22 +7,22 @@
       {{ task?.description}}
     </p>
     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-      Planned: From {{ task?.start_date_planned | date:'longDate' }} to {{ task?.end_date_planned | date:'longDate'}}
+      Planned: From {{ task?.startDate | date:'longDate' }} to {{ task?.endDate | date:'longDate'}}
     </p>
     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-      @if( task?.start_date_actual){
-        <span>Actual: From {{ task?.start_date_actual | date:'longDate' }}</span>
+      @if( task?.actualStartDate){
+        <span>Actual: From {{ task?.actualStartDate | date:'longDate' }}</span>
       }
-      @if( task?.start_date_actual && task?.end_date_actual ){
-        <span> to {{ task?.end_date_actual | date:'longDate' }}</span>
+      @if( task?.actualStartDate && task?.actualEndDate ){
+        <span> to {{ task?.actualEndDate | date:'longDate' }}</span>
       }
     </p>
   </div>
   <div class="flex-1 items-center text-base font-semibold text-gray-900 dark:text-white">
     <p class="text-sm text-gray-500 truncate dark:text-gray-400">{{ task?.status }}</p>
     <p class="text-sm text-gray-500 truncate dark:text-gray-400">{{ task?.priority }}</p>
-    @if ( task?.end_date_actual){
-      <p class="text-sm text-gray-500 truncate dark:text-gray-400"> Task completed on {{ task?.end_date_actual | date:'longDate' }}</p>
+    @if ( task?.actualEndDate){
+      <p class="text-sm text-gray-500 truncate dark:text-gray-400"> Task completed on {{ task?.actualEndDate | date:'longDate' }}</p>
     }
   </div>
 </div>

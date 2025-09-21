@@ -27,14 +27,27 @@
         @for(record of data?.content ?? []; track $index){
           <tr>
             @for(column of columns; track column.key){
-              <td class="px-6 py-3 text-[15px] font-medium text-slate-700 tracking-normal font-inter"
-              [ngClass]="{
-                'text-left': column.justify === 'left',
-                'text-center': column.justify === 'center',
-                'text-right': column.justify === 'right'
-              }">
-                {{ record[column.key] }}
-              </td>
+              @if(column.key === "color"){
+                <td class="px-6 py-3 align-middle" [ngClass]="{
+                                  'text-left': column.justify === 'left',
+                                  'text-center': column.justify === 'center',
+                                  'text-right': column.justify === 'right'
+                                }">
+                  <span class="inline-flex items-center gap-2 px-2 py-1 shadow-sm" [style.background]="record[column.key]"
+                    [style.color]="textOn(record[column.key])" [attr.aria-label]="'Color ' + record[column.key]" [title]="record[column.key]">
+                    <span class="font-mono text-sm drop-shadow">{{ record[column.key] }}</span> 
+                  </span>
+                </td>
+              } @else {
+                <td class="px-6 py-3 text-[15px] font-medium text-slate-700 tracking-normal font-inter" 
+                    [ngClass]="{
+                                  'text-left': column.justify === 'left',
+                                  'text-center': column.justify === 'center',
+                                  'text-right': column.justify === 'right'
+                                }">
+                        {{ record[column.key] }}
+                </td>
+              }
             }
             @if(actions.length > 0){
               <td class="px-6 py-3 text-[15px] font-medium text-right text-gray-800 tracking-normal font-inter">

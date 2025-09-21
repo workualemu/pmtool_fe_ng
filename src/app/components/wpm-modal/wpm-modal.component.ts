@@ -1,8 +1,11 @@
+import { NgClass } from '@angular/common';
 import { Component, input, OnChanges, output, signal, SimpleChanges } from '@angular/core';
+
+type ModalVariant = 'right' | 'left' | 'bottom' | 'center-bounce';
 
 @Component({
   selector: 'app-wpm-modal',
-  imports: [],
+  imports: [NgClass],
   templateUrl: './wpm-modal.component.html',
   styleUrl: './wpm-modal.component.css'
 })
@@ -11,6 +14,9 @@ export class WpmModalComponent implements OnChanges{
   open = input<boolean>(false);                       // controls visibility
   title = input<string>('');                     // optional header text
   widthClass = input<string>('w-96');                 // e.g., 'w-80', 'w-[28rem]', 'max-w-md'
+  heightClass = input<string>('max-h-[85vh]');
+  variant = input<ModalVariant>('right');
+
   closeOnBackdrop = input<boolean>(true);             // click overlay to close
   closeOnEsc = input<boolean>(true);                  // press Esc to close
 

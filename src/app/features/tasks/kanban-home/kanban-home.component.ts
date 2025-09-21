@@ -17,10 +17,10 @@ export class KanbanHomeComponent {
   data = { 
     id: 1,
     title: "Task 1",
-    start_date_planned: '2025-09-10',
-    end_date_planned: '2025-09-10',
-    start_date_actual: null,
-    end_date_actual: null,
+    startDate: '2025-09-10',
+    endDate: '2025-09-10',
+    actualStartDate: null,
+    actualEndDate: null,
     status: "In Progress",
     priority: "Low",
     description: "This task 1 is intended to finalize ..."
@@ -46,10 +46,10 @@ export class KanbanHomeComponent {
     this.data = { 
       id: payload.id ?? null,
       title: payload.title,
-      start_date_planned: payload.start_date_planned,
-      end_date_planned: payload.end_date_planned,
-      start_date_actual: payload.start_date_actual,
-      end_date_actual: payload.end_date_actual,
+      startDate: payload.startDate,
+      endDate: payload.endDate,
+      actualStartDate: payload.actualStartDate,
+      actualEndDate: payload.actualEndDate,
       status: payload.status,
       priority: payload.priority,
       description: payload.description

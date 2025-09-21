@@ -1,20 +1,46 @@
 @if (open()) {
-<!-- Overlay -->
-<div class="fixed inset-0 z-[9990] bg-black/60 flex items-stretch" role="dialog" aria-modal="true"
-  (click)="onOverlayClick($event)" (window:keydown.escape)="onEsc()">
-  <!-- Right panel -->
-  <div class="relative ml-auto h-full bg-white dark:bg-gray-900 dark:text-gray-100 shadow-xl
-             transition-transform duration-300 ease-in-out will-change-transform
-             z-[9991] border-l border-gray-200/70 dark:border-gray-700" [class]="widthClass()"
-    [class.translate-x-0]="slideIn()" [class.translate-x-full]="!slideIn()" (click)="$event.stopPropagation()">
+<div class="fixed inset-0 z-[9990] bg-black/60 flex" role="dialog" aria-modal="true" (click)="onOverlayClick($event)"
+  (window:keydown.escape)="onEsc()" 
+  [class.items-stretch]="variant() === 'right' || variant() === 'left'"
+  [class.justify-end]="variant() === 'right'"
+  [class.justify-start]="variant() === 'left'"
+
+  [class.items-end]="variant() === 'bottom'"
+
+  [class.items-center]="variant() === 'center-bounce'"
+  [class.justify-center]="variant() === 'center-bounce'">
+
+  <div 
+      class="relative bg-white dark:bg-gray-900 dark:text-gray-100 shadow-xl
+           transition-transform duration-300 ease-in-out will-change-transform
+           z-[9991] border-gray-200/70 dark:border-gray-700" 
+      (click)="$event.stopPropagation()" 
+      [ngClass]="[
+        (variant() === 'right' || variant() === 'left' || variant() === 'center-bounce') ? widthClass() : '',
+        (variant() === 'bottom') ? heightClass() : '',
+        (variant() === 'right' || variant() === 'left') ? 'h-full' : '',
+        (variant() === 'right') ? 'border-l' : '',
+        (variant() === 'left')  ? 'border-r' : '',
+        (variant() === 'bottom') ? 'rounded-t-2xl w-full' : '',
+        (!slideIn() && variant() === 'right')  ? 'translate-x-full'  : '',
+        (!slideIn() && variant() === 'left')   ? '-translate-x-full' : '',
+        ( slideIn() && (variant() === 'right' || variant() === 'left')) ? 'translate-x-0' : '',
+        (!slideIn() && variant() === 'bottom') ? 'translate-y-full'  : '',
+        ( slideIn() && variant() === 'bottom') ? 'translate-y-0'     : '',
+        (!slideIn() && variant() === 'center-bounce') ? 'opacity-0 scale-95' : '',
+        ( slideIn() && variant() === 'center-bounce') ? 'opacity-100 scale-100 animate-bounce-in' : ''
+      ]">
+
     <!-- Header -->
-    <div class="sticky top-0 px-6 py-4 border-b bg-inherit z-10 flex items-center justify-between">
+    <div class="sticky top-0 px-6 py-4 border-b bg-inherit z-10 flex items-center justify-between"
+      [class.rounded-t-2xl]="variant() === 'bottom'">
       <h3 class="text-lg font-semibold">{{ title() }}</h3>
       <button class="p-1 text-gray-600 hover:text-gray-900" (click)="close()" aria-label="Close">✕</button>
     </div>
 
-    <!-- Body (projected content) -->
-    <div class="p-4 overflow-auto h-[calc(100vh-4rem)]">
+    <!-- Body -->
+    <div class="p-4 overflow-auto" [class.h-[calc(100vh-4rem)]]="variant() === 'right' || variant() === 'left'"
+      [class.max-h-[calc(85vh-4rem)]]="variant() === 'bottom' || variant() === 'center-bounce'">
       <ng-content />
     </div>
   </div>

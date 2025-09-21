@@ -1,0 +1,40 @@
+<div class="w-full max-w-lg">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
+    <div>
+      <label class="block text-sm font-medium mb-1">
+        Value <span class="text-red-600">*</span>
+      </label>
+      <input class="w-full rounded border px-3 py-2" type="text" formControlName="value"
+        placeholder="e.g. Prepare sprint report" />
+      @if (form.controls.value.touched && form.controls.value.invalid) {
+      <p class="text-xs text-red-600 mt-1">Value is required.</p>
+      }
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium mb-1">Description</label>
+      <textarea class="w-full rounded border px-3 py-2" rows="3" formControlName="description"
+        placeholder="Optional details..."></textarea>
+    </div>
+
+    <div>
+      <label for="priority-color" class="block text-sm font-medium mb-1">Color</label>
+      <app-color-picker id="priority-color" formControlName="color" [label]="'Choose color'"
+        class="block"></app-color-picker>
+      @if (form.controls.color?.touched && form.controls.color?.invalid) {
+        <p class="text-xs text-red-600 mt-1">Please choose a valid color.</p>
+      }
+    </div>
+
+    <div class="flex items-center justify-end gap-2 pt-4">
+      <button type="button" class="rounded px-4 py-2 border" (click)="cancel.emit()" [disabled]="saving()">
+        Cancel
+      </button>
+
+      <button type="submit" class="rounded px-4 py-2 bg-blue-600 text-white disabled:opacity-50"
+        [disabled]="form.invalid || saving()">
+        {{ mode() === 'edit' ? (saving() ? 'Saving…' : 'Save changes') : (saving() ? 'Saving…' : 'Create') }}
+      </button>
+    </div>
+  </form>
+</div>

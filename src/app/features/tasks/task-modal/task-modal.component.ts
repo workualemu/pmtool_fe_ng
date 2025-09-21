@@ -32,12 +32,12 @@ export class TaskModalComponent {
 
       status: this.fb.nonNullable.control<Task['status']>('Not Started', [Validators.required]),
 
-      start_date_planned: this.fb.nonNullable.control('', [Validators.required]),
-      end_date_planned:   this.fb.nonNullable.control('', [Validators.required]),
+      startDate: this.fb.nonNullable.control('', [Validators.required]),
+      endDate:   this.fb.nonNullable.control('', [Validators.required]),
 
       // actuals: string | null (nullable)
-      start_date_actual: new FormControl<string | null>(null),
-      end_date_actual:   new FormControl<string | null>(null),
+      actualStartDate: new FormControl<string | null>(null),
+      actualEndDate:   new FormControl<string | null>(null),
 
       priority: this.fb.nonNullable.control<Task['priority']>('Medium', [Validators.required]),
     },
@@ -55,10 +55,10 @@ export class TaskModalComponent {
             title: t.title,
             description: t.description ?? '',
             status: t.status,
-            start_date_planned: t.start_date_planned,
-            end_date_planned: t.end_date_planned,
-            start_date_actual: t.start_date_actual ?? null,
-            end_date_actual: t.end_date_actual ?? null,
+            startDate: t.startDate,
+            endDate: t.endDate,
+            actualStartDate: t.actualStartDate ?? null,
+            actualEndDate: t.actualEndDate ?? null,
             priority: t.priority,
           },
           { emitEvent: false }
@@ -70,10 +70,10 @@ export class TaskModalComponent {
             title: '',
             description: '',
             status: 'Not Started',
-            start_date_planned: '',
-            end_date_planned: '',
-            start_date_actual: null,
-            end_date_actual: null,
+            startDate: '',
+            endDate: '',
+            actualStartDate: null,
+            actualEndDate: null,
             priority: 'Medium',
           },
           { emitEvent: false }
@@ -95,10 +95,10 @@ export class TaskModalComponent {
       title: v.title,
       description: v.description || undefined,
       status: v.status,
-      start_date_planned: v.start_date_planned,
-      end_date_planned: v.end_date_planned,
-      start_date_actual: v.start_date_actual ?? null,
-      end_date_actual: v.end_date_actual ?? null,
+      startDate: v.startDate,
+      endDate: v.endDate,
+      actualStartDate: v.actualStartDate ?? null,
+      actualEndDate: v.actualEndDate ?? null,
       priority: v.priority,
     };
 

@@ -10,6 +10,7 @@ import { ClientLayoutComponent } from './layouts/client-layout/client-layout.com
 import { KanbanHomeComponent } from './features/tasks/kanban-home/kanban-home.component';
 import { GanttHomeComponent } from './features/tasks/gantt-home/gantt-home.component';
 import { ReportHomeComponent } from './features/report-home/report-home.component';
+import { TaskPriorityListComponent } from './features/client-settings/task-priority-list/task-priority-list.component';
 
 export const routes: Routes = [
   {
@@ -29,6 +30,7 @@ export const routes: Routes = [
       {  path: 'kanban-home', component: KanbanHomeComponent },
       {  path: 'gantt-home', component: GanttHomeComponent },
       {  path: 'reports', component: ReportHomeComponent },
+      {  path: 'settings/task-priorities', component: TaskPriorityListComponent },
     ]
   },
   {  path: 'register', component: Register },

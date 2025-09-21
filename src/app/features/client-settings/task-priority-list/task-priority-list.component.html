@@ -1,0 +1,14 @@
+<div class="flex items-center justify-between mb-4">
+  <h1 class="text-2xl font-bold">{{ title }}</h1>
+  <button class="rounded px-4 py-2 bg-blue-600 text-white" (click)="addNewTask()">New Task Priority</button>
+</div>
+<app-wpm-modal #modal [open]="show()" (openChange)="show.set($event)" title="Create Task Priority" variant="center-bounce"
+  widthClass="w-3xl" [closeOnBackdrop]="true" [closeOnEsc]="true" (closed)="show.set(false)">
+  @if (show()) {
+  <app-task-priority-modal [record]="currentRecord" (save)="submitTask($event); 
+      modal.close()" (cancel)="modal.close()">>
+  </app-task-priority-modal>
+  }
+</app-wpm-modal>
+<app-wpm-table [data]="response" [columns]="columns" [actions]="actions" (action)="handleTableAction($event)">
+</app-wpm-table>

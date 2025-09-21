@@ -3,6 +3,7 @@ export interface MainSidebarItem {
   label: string;
   tooltip: string;
   redirectTo: string;
+  children?: MainSidebarItem[];
 }
 
 export interface HttpPageResponse<T> {

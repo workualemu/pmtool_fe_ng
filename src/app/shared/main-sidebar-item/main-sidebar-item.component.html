@@ -1,9 +1,9 @@
-<a [routerLink]="redirectTo" routerLinkActive="text-primary dark:bg-navy-600 bg-primary/10 dark:text-accent-light"
+<a [routerLink]="redirectTo" routerLinkActive="dark:bg-navy-600 bg-primary/10 dark:text-accent-light"
   class="group flex h-11 items-center rounded-lg px-2 outline-none transition-colors duration-200 hover:bg-blue-100 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25"
   [class.justify-center]="collapsed" [title]="collapsed ? label : null">
-  <lucide-icon [name]="icon" class="h-6 w-6 text-sky-500"></lucide-icon>
+  <lucide-icon [name]="icon" class="h-5 w-5 text-slate-800"></lucide-icon>
   @if(!collapsed){
-  <span class="ml-3 text-sm text-slate-700 dark:text-navy-100 transition-[opacity,margin] duration-200"
+  <span class="text-slate-800 ml-3 text-sm dark:text-navy-100 transition-[opacity,margin] duration-200"
     [class.opacity-0]="collapsed" [class.pointer-events-none]="collapsed" [class.ml-0]="collapsed">{{ label }}</span>
   }
 </a>

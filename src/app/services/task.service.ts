@@ -21,7 +21,8 @@ import { environment } from '../../environments/environment';
 import { Task } from '../models/task.model';
 import { HttpListOptions, HttpPageResponse } from '../models/utility.model';
 
-const apiUrlTasks = `${environment.apiUrl}/client/admin/projects`;
+// const apiUrlProjects = `${environment.apiUrl}/client/admin/tasks`;
+const apiUrlTasks = `${environment.apiUrl}/client/admin`;
 
 // export interface PageResponse<T> {
 //   content: T[];
@@ -46,7 +47,9 @@ const apiUrlTasks = `${environment.apiUrl}/client/admin/projects`;
 export class TaskService {
   private http = inject(HttpClient);
 
-  getTasks(opts: Partial<HttpListOptions> = {}): Observable<HttpPageResponse<Task>> {
+  projectId: number = 5;
+
+  getTasksByProject(projectId: number, opts: Partial<HttpListOptions> = {}): Observable<HttpPageResponse<Task>> {
     const {
       pageNumber = 0,
       pageSize = 5,
@@ -62,8 +65,19 @@ export class TaskService {
         sortDir,
       },
     });
-
-    // Thanks to your withCreds interceptor, cookies are included automatically.
-    return this.http.get<HttpPageResponse<Task>>(apiUrlTasks, { params });
+    return this.http.get<HttpPageResponse<Task>>(`${apiUrlTasks}/${projectId}/tasks`, { params });
   }
+
+  upsertTask(projectId: number, task: Omit<Task, 'id'> & {id?: number}): Observable<Task> {
+    if (task.id) {
+      return this.http.put<Task>(`${apiUrlTasks}/tasks/${task.id}`, task);
+    } else {
+      return this.http.post<Task>(`${apiUrlTasks}/${projectId}/task`, task);
+    }
+  }
+
+  deleteTask(task: Task): Observable<Task> {
+    return this.http.delete<Task>(`${apiUrlTasks}/tasks/${task.id}`);
+  }
+
 }

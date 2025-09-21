@@ -42,15 +42,15 @@
         <label class="block text-sm font-medium mb-1">
           Start date (planned) <span class="text-red-600">*</span>
         </label>
-        <input class="w-full rounded border px-3 py-2" type="date" formControlName="start_date_planned" />
+        <input class="w-full rounded border px-3 py-2" type="date" formControlName="startDate" />
       </div>
       <div>
         <label class="block text-sm font-medium mb-1">
           End date (planned) <span class="text-red-600">*</span>
         </label>
-        <input class="w-full rounded border px-3 py-2" type="date" formControlName="end_date_planned" />
+        <input class="w-full rounded border px-3 py-2" type="date" formControlName="endDate" />
         @if (form.hasError('dateOrder') &&
-        (form.controls.end_date_planned.touched || form.controls.start_date_planned.touched)) {
+        (form.controls.endDate.touched || form.controls.startDate.touched)) {
         <p class="text-xs text-red-600 mt-1">End date cannot be before start date.</p>
         }
       </div>

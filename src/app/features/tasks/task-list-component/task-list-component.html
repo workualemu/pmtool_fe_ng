@@ -1,23 +1,28 @@
-<h1 class="text-3xl font-bold underline">
-  {{ title }}
-</h1>
 <div class="flex items-center justify-between mb-4">
-  <h1 class="text-2xl font-bold">Tasks</h1>
-  <button class="rounded px-4 py-2 bg-blue-600 text-white" (click)="addTask()">New Task</button>
+  <h1 class="text-2xl font-bold">{{ title }}</h1>
+  <button class="rounded px-4 py-2 bg-blue-600 text-white" (click)="addNewTask()">New Task</button>
 </div>
+<app-wpm-modal 
+  #modal 
+  [open]="show()" 
+  (openChange)="show.set($event)" 
+  title="Create Task" variant="right"
+  widthClass="w-3xl" 
+  [closeOnBackdrop]="true" 
+  [closeOnEsc]="true" 
+  (closed)="show.set(false)">
+  @if (show()) {
+    <app-task-modal 
+      [task]="currentTask" 
+      (save)="submitTask($event); 
+      modal.close()" 
+      (cancel)="modal.close()">>
+    </app-task-modal>
+  }
+</app-wpm-modal>
 <app-wpm-table 
   [data]="response" 
   [columns]="columns"
   [actions]="actions" 
   (action)="handleTableAction($event)">
 </app-wpm-table>
-
-<div class="flow-root">
-  <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-    @for (task of tasks; track task.id) {
-      <li class="py-3 sm:py-4">
-        <app-task-card-component [task]="task" (completeTask)="onCompleteTask($event)"></app-task-card-component>
-      </li>
-    } 
-  </ul>
-</div>
