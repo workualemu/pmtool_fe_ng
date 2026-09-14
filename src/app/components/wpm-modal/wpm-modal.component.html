@@ -1,46 +1,67 @@
 @if (open()) {
-<div class="fixed inset-0 z-[9990] bg-black/60 flex" role="dialog" aria-modal="true" (click)="onOverlayClick($event)"
-  (window:keydown.escape)="onEsc()" 
-  [class.items-stretch]="variant() === 'right' || variant() === 'left'"
-  [class.justify-end]="variant() === 'right'"
-  [class.justify-start]="variant() === 'left'"
+<!-- Backdrop -->
+<div class="fixed inset-0 z-[9990] bg-slate-900/50 backdrop-blur-sm transition-opacity" role="dialog" aria-modal="true"
+  (click)="onOverlayClick($event)" (window:keydown.escape)="onEsc()" [class.flex]="true"
+  [class.items-stretch]="variant() === 'right' || variant() === 'left'" [class.justify-end]="variant() === 'right'"
+  [class.justify-start]="variant() === 'left'" [class.items-end]="variant() === 'bottom'"
+  [class.items-center]="variant() === 'center-bounce'" [class.justify-center]="variant() === 'center-bounce'">
 
-  [class.items-end]="variant() === 'bottom'"
+  <!-- Panel -->
+  <div (click)="$event.stopPropagation()" class="relative bg-white/98 dark:bg-slate-900/98 text-slate-800 dark:text-slate-100
+             shadow-2xl border border-slate-200/70 dark:border-slate-700/60
+             transition-transform duration-300 ease-in-out will-change-transform z-[10000]
+             divide-y divide-slate-200/80 dark:divide-slate-700/60" 
+        [ngClass]="[
+        (variant() === 'right' || variant() === 'left') ? 'h-dvh w-[28rem] max-w-[92vw] rounded-none' : '',
+        (variant() === 'bottom') ? 'w-full max-w-3xl rounded-t-2xl' : '',
+        (variant() === 'center-bounce') ? 'w-full max-w-2xl rounded-2xl' : '',
 
-  [class.items-center]="variant() === 'center-bounce'"
-  [class.justify-center]="variant() === 'center-bounce'">
-
-  <div 
-      class="relative bg-white dark:bg-gray-900 dark:text-gray-100 shadow-xl
-           transition-transform duration-300 ease-in-out will-change-transform
-           z-[9991] border-gray-200/70 dark:border-gray-700" 
-      (click)="$event.stopPropagation()" 
-      [ngClass]="[
-        (variant() === 'right' || variant() === 'left' || variant() === 'center-bounce') ? widthClass() : '',
-        (variant() === 'bottom') ? heightClass() : '',
-        (variant() === 'right' || variant() === 'left') ? 'h-full' : '',
         (variant() === 'right') ? 'border-l' : '',
         (variant() === 'left')  ? 'border-r' : '',
-        (variant() === 'bottom') ? 'rounded-t-2xl w-full' : '',
+
         (!slideIn() && variant() === 'right')  ? 'translate-x-full'  : '',
         (!slideIn() && variant() === 'left')   ? '-translate-x-full' : '',
         ( slideIn() && (variant() === 'right' || variant() === 'left')) ? 'translate-x-0' : '',
-        (!slideIn() && variant() === 'bottom') ? 'translate-y-full'  : '',
-        ( slideIn() && variant() === 'bottom') ? 'translate-y-0'     : '',
+        (!slideIn() && variant() === 'bottom') ? 'translate-y-full' : '',
+        ( slideIn() && variant() === 'bottom') ? 'translate-y-0'    : '',
         (!slideIn() && variant() === 'center-bounce') ? 'opacity-0 scale-95' : '',
         ( slideIn() && variant() === 'center-bounce') ? 'opacity-100 scale-100 animate-bounce-in' : ''
       ]">
 
     <!-- Header -->
-    <div class="sticky top-0 px-6 py-4 border-b bg-inherit z-10 flex items-center justify-between"
-      [class.rounded-t-2xl]="variant() === 'bottom'">
-      <h3 class="text-lg font-semibold">{{ title() }}</h3>
-      <button class="p-1 text-gray-600 hover:text-gray-900" (click)="close()" aria-label="Close">✕</button>
+    <div class="sticky top-0 z-10 px-6 py-4 bg-inherit/80 backdrop-blur-sm
+               flex items-center justify-between"
+      [class.rounded-t-2xl]="variant() === 'bottom' || variant() === 'center-bounce'">
+      <div class="flex items-center gap-3">
+        <div
+          class="h-9 w-9 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-500 grid place-items-center shadow-sm">
+          <svg class="h-5 w-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M5 4h14a1 1 0 0 1 1 1v3H4V5a1 1 0 0 1 1-1zm-1 6h16v9a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V10z" />
+          </svg>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold tracking-tight">{{ title() }}</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Define label, optional description, and color.</p>
+        </div>
+      </div>
+
+      <button class="inline-flex h-8 w-8 items-center justify-center rounded-lg
+                 text-slate-500 hover:bg-slate-100 hover:text-slate-700
+                 focus:outline-none focus:ring-2 focus:ring-indigo-500/50
+                 dark:hover:bg-slate-800" (click)="close()" aria-label="Close">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M18.3 5.7a1 1 0 0 0-1.4-1.4L12 9.17 7.1 4.3A1 1 0 0 0 5.7 5.7L10.6 10.6 5.7 15.5a1 1 0 1 0 1.4 1.4L12 12.03l4.9 4.87a1 1 0 0 0 1.4-1.4l-4.9-4.9 4.9-4.9z" />
+        </svg>
+      </button>
     </div>
 
+    <!-- Thin accent bar -->
+    <div class="h-[3px] bg-gradient-to-r from-indigo-500/80 via-fuchsia-500/70 to-cyan-500/80"></div>
+
     <!-- Body -->
-    <div class="p-4 overflow-auto" [class.h-[calc(100vh-4rem)]]="variant() === 'right' || variant() === 'left'"
-      [class.max-h-[calc(85vh-4rem)]]="variant() === 'bottom' || variant() === 'center-bounce'">
+    <div class="p-6 overflow-auto" [class.h-[calc(100dvh-4rem-3px)]]="variant() === 'right' || variant() === 'left'"
+      [class.max-h-[calc(85dvh-4rem-3px)]]="variant() === 'bottom' || variant() === 'center-bounce'">
       <ng-content />
     </div>
   </div>
