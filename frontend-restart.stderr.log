@@ -1,0 +1,99 @@
+▲ [WARNING] NG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator. [plugin angular-compiler]
+
+    src/app/components/color-picker/color-picker.component.ts:41:65:
+      41 │ ...ext-sm font-medium tabular-nums">{{ value?.toUpperCase() }}</span>
+         ╵                                               ~~~~~~~~~~~
+
+
+▲ [WARNING] NG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator. [plugin angular-compiler]
+
+    src/app/features/client-settings/task-priority-modal/task-priority-modal.component.html:25:32:
+      25 │ ...  @if (form.controls.color?.touched && form.controls.color?.inv...
+         ╵                                ~~~~~~~
+
+  Warning occurs in the template of component TaskPriorityModalComponent.
+
+    src/app/features/client-settings/task-priority-modal/task-priority-modal.component.ts:15:15:
+      15 │   templateUrl: './task-priority-modal.component.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+▲ [WARNING] NG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator. [plugin angular-compiler]
+
+    src/app/features/client-settings/task-priority-modal/task-priority-modal.component.html:25:64:
+      25 │ ...f (form.controls.color?.touched && form.controls.color?.invalid) {
+         ╵                                                            ~~~~~~~
+
+  Warning occurs in the template of component TaskPriorityModalComponent.
+
+    src/app/features/client-settings/task-priority-modal/task-priority-modal.component.ts:15:15:
+      15 │   templateUrl: './task-priority-modal.component.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+▲ [WARNING] NG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator. [plugin angular-compiler]
+
+    src/app/shared/main-sidebar/main-sidebar.component.html:82:108:
+      82 │ ... dark:bg-navy-800" [style.left.px]="flyoutPos()[item.label]?.left"
+         ╵                                                                 ~~~~
+
+  Warning occurs in the template of component MainSidebarComponent.
+
+    src/app/shared/main-sidebar/main-sidebar.component.ts:18:15:
+      18 │   templateUrl: './main-sidebar.component.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+▲ [WARNING] NG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator. [plugin angular-compiler]
+
+    src/app/shared/main-sidebar/main-sidebar.component.html:83:59:
+      83 │ ...px]="flyoutPos()[item.label]?.top" [style.maxHeight.px]="flyout...
+         ╵                                  ~~~
+
+  Warning occurs in the template of component MainSidebarComponent.
+
+    src/app/shared/main-sidebar/main-sidebar.component.ts:18:15:
+      18 │   templateUrl: './main-sidebar.component.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+▲ [WARNING] NG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator. [plugin angular-compiler]
+
+    src/app/shared/main-sidebar/main-sidebar.component.html:83:111:
+      83 │ ...l]?.top" [style.maxHeight.px]="flyoutPos()[item.label]?.maxHeight"
+         ╵                                                            ~~~~~~~~~
+
+  Warning occurs in the template of component MainSidebarComponent.
+
+    src/app/shared/main-sidebar/main-sidebar.component.ts:18:15:
+      18 │   templateUrl: './main-sidebar.component.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+▲ [WARNING] NG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator. [plugin angular-compiler]
+
+    src/app/shared/main-sidebar/main-sidebar.component.html:87:68:
+      87 │ ...         'left-[-5px]': flyoutPos()[item.label]?.side === 'right',
+         ╵                                                     ~~~~
+
+  Warning occurs in the template of component MainSidebarComponent.
+
+    src/app/shared/main-sidebar/main-sidebar.component.ts:18:15:
+      18 │   templateUrl: './main-sidebar.component.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+▲ [WARNING] NG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator. [plugin angular-compiler]
+
+    src/app/shared/main-sidebar/main-sidebar.component.html:88:69:
+      88 │ ...          'right-[-5px]': flyoutPos()[item.label]?.side === 'left'
+         ╵                                                       ~~~~
+
+  Warning occurs in the template of component MainSidebarComponent.
+
+    src/app/shared/main-sidebar/main-sidebar.component.ts:18:15:
+      18 │   templateUrl: './main-sidebar.component.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+NG02801: Angular detected that `HttpClient` is not configured to use `fetch` APIs. It's strongly recommended to enable `fetch` for applications that use Server-Side Rendering for better performance and compatibility. To enable `fetch`, add the `withFetch()` to the `provideHttpClient()` call at the root of the application.

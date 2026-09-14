@@ -10,13 +10,14 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { WpmInputDirective } from '../../shared/directives/wpm-input.directive';
 
 type Hex = `#${string}`;
 
 @Component({
   selector: 'app-color-picker',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, WpmInputDirective],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -29,7 +30,7 @@ type Hex = `#${string}`;
     <!-- Trigger -->
     <button
       type="button"
-      class="flex items-center gap-2 rounded border px-3 py-2 w-[12rem] justify-between hover:bg-gray-50 dark:hover:bg-gray-800"
+      class="flex items-center gap-2 w-full rounded border border-slate-300/80 bg-white px-3 py-2 shadow-sm placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 dark:bg-slate-900 dark:border-slate-700"
       [attr.aria-expanded]="open"
       [attr.aria-label]="label || 'Color picker'"
       (click)="toggle()"
@@ -92,7 +93,7 @@ type Hex = `#${string}`;
             <input
               #hexBox
               type="text"
-              class="flex-1 rounded border px-2 py-2 font-mono text-sm"
+              wpmInput
               [value]="value"
               (input)="onHexTyped($any($event.target).value)"
               placeholder="#AABBCC"

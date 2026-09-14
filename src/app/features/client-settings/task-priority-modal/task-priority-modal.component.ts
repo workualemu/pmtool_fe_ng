@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators, FormControl, AbstractControl, ValidationErrors } from '@angular/forms';
 import { TaskPriority } from '../../../models/task-priority.model';
 import { ColorPickerComponent } from '../../../components/color-picker/color-picker.component';
+import { WpmInputDirective } from '../../../shared/directives/wpm-input.directive';
 
 type Mode = 'create' | 'edit';
 type RecordUpsert = Omit<TaskPriority, 'id'> & { id?: number };
@@ -10,7 +11,7 @@ type RecordUpsert = Omit<TaskPriority, 'id'> & { id?: number };
 @Component({
   selector: 'app-task-priority-modal',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ColorPickerComponent],
+  imports: [CommonModule, ReactiveFormsModule, ColorPickerComponent, WpmInputDirective],
   templateUrl: './task-priority-modal.component.html',
   styleUrl: './task-priority-modal.component.css'
 })

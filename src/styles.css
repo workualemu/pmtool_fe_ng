@@ -1,4 +1,32 @@
 @import "tailwindcss";
+
+@layer components {
+  .wpm-input {
+    @apply w-full rounded border border-slate-300/80 bg-white px-3 py-2 shadow-sm placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 dark:bg-slate-900 dark:border-slate-700;
+  }
+
+  /* Only add the extra utilities here (no @apply wpm-input) */
+  .wpm-textarea {
+    @apply w-full rounded border border-slate-300/80 bg-white px-3 py-2 shadow-sm placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 dark:bg-slate-900 dark:border-slate-700;
+  }
+
+  .wpm-select {
+    @apply w-full rounded border border-slate-300/80 bg-white px-3 py-2 shadow-sm placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 dark:bg-slate-900 dark:border-slate-700;
+  }
+
+  .wpm-input--invalid {
+    @apply border-rose-400 focus:ring-rose-500/30 focus:border-rose-500;
+  }
+
+  .wpm-button-primary {
+    @apply rounded bg-indigo-600 px-4 py-2 text-white shadow-sm hover:bg-indigo-600/90 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 disabled:opacity-50;
+  }
+
+  .wpm-button-secondary {
+    @apply rounded bg-indigo-600 px-4 py-2 text-white shadow-sm hover:bg-indigo-600/90 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 disabled:opacity-50;
+  }
+}
+
 @import '@angular/cdk/overlay-prebuilt.css';
 
 /* defaults = expanded */
